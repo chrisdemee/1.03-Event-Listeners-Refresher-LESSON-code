@@ -8,17 +8,35 @@ function render (html) {
 -------------------------------- */
 let clickCount = 0
 
+document.getElementById('btnClick').addEventListener('click', () => { 
 
+clickCount++
+
+render(`<p> You clicked ${clickCount} times on the button</p>`)
+
+
+})
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
+const dblCard = document.getElementById('dblCard')
 
-
+dblCard.addEventListener('dblclick', () => {
+   dblCard.classList.toggle('activated')
+   const state = dblCard.classList.contains('activated') ? 'ON' : 'OFF'
+   render(`<p>Double-click highlight is <strong>${state}</strong>.</p>`)
+})
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
+const kbKey = document.getElementById('kbKey')
+const kbCode = document.getElementById('kbCode')
 
-
+document.addEventListener('keydown', (e) => {
+   kbKey.textContent = e.key === ' ' ? '(space)' : e.key        
+   kbCode.textContent = e.code                
+ 
+})
 /* ----------------------------------------
    Demo 4: Show Time (12-hour format + day)
 ----------------------------------------- */
@@ -29,6 +47,7 @@ let clickCount = 0
 -------------------------- */
 document.getElementById('btnClear').addEventListener('click', () => {
   render('<span class="text-secondary">Output cleared.</span>')
+  clickCount = 0
 })
 
 /* =================================================
@@ -40,6 +59,7 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On mouseenter: add a highlight class, increase the counter, and show the count in #out
    - On mouseleave: remove the highlight class and show a message in #out
 
+   
    Option B — Scroll Progress Bar
    - Add a small Bootstrap progress bar element at the very top of the page
    - Select the inner bar element
@@ -55,3 +75,12 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
+ const hoverbtn = document.getElementById('btnTime');
+ let hovercount = 0;
+
+ hoverbtn.addEventListener('mouseenter', () => {
+   hoverbtn.classList.add('activated');
+   hovercount++;
+   render(`<p>You hovered over the button ${hovercount} times.</p>`);
+   document.getElementById('out').classList.toggle('activated')
+ })
