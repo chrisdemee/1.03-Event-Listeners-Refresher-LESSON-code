@@ -75,12 +75,17 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
- const hoverbtn = document.getElementById('btnTime');
- let hovercount = 0;
+const card = document.getElementById('btnTime');
+const output = document.getElementById('out');
+let hoverCount = 0;
 
- hoverbtn.addEventListener('mouseenter', () => {
-   hoverbtn.classList.add('activated');
-   hovercount++;
-   render(`<p>You hovered over the button ${hovercount} times.</p>`);
-   document.getElementById('out').classList.toggle('activated')
- })
+card.addEventListener('mouseenter', () => {
+  card.classList.add('highlight'); 
+  hoverCount++;
+  output.innerHTML = `<p>You hovered over the card ${hoverCount} time${hoverCount === 1 ? '' : 's'}.</p>`;
+});
+
+card.addEventListener('mouseleave', () => {
+  card.classList.remove('highlight'); 
+  output.innerHTML = `<p>You left the card.</p>`;
+});
